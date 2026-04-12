@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --neon-blue: #00D4FF;
+  --neon-purple: #8B5CF6;
+  --neon-pink: #EC4899;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #8B5CF6 #0a0a0f;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: #0a0a0f;
+}
+*::-webkit-scrollbar-thumb {
+  background: #8B5CF6;
+  border-radius: 4px;
+}
+
+body {
+  font-family: 'Rajdhani', sans-serif;
+  background: #0a0a0f;
+  color: #e5e7eb;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Orbitron', sans-serif;
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink;
+  }
+  .glow-blue {
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), 0 0 40px rgba(0, 212, 255, 0.1);
+  }
+  .glow-purple {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3), 0 0 40px rgba(139, 92, 246, 0.1);
+  }
+  .glow-pink {
+    box-shadow: 0 0 20px rgba(236, 72, 153, 0.3), 0 0 40px rgba(236, 72, 153, 0.1);
+  }
+  .glow-gold {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3), 0 0 40px rgba(255, 215, 0, 0.1);
+  }
+  .card-gaming {
+    @apply bg-dark-800 border border-dark-600 rounded-xl overflow-hidden transition-all duration-300;
+  }
+  .card-gaming:hover {
+    @apply border-neon-blue/50;
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
+  }
+}

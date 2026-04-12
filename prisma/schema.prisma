@@ -1,0 +1,122 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id       String  @id @default(cuid())
+  username String  @unique
+  password String
+  role     String  @default("player")
+  player   Player?
+}
+
+model Player {
+  id              String           @id @default(cuid())
+  userId          String           @unique
+  user            User             @relation(fields: [userId], references: [id])
+  firstName       String
+  lastName        String
+  pseudo          String
+  className       String
+  photo           String?
+  mainGame        String?
+  ranks           Rank[]
+  trophies        PlayerTrophy[]
+  stats           PlayerStat[]
+  tournamentSlots TournamentSlot[]
+  supporterSlots  SupporterSlot[]
+}
+
+model Rank {
+  id       String @id @default(cuid())
+  playerId String
+  player   Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  game     String
+  rank     String
+
+  @@unique([playerId, game])
+}
+
+model Trophy {
+  id          String         @id @default(cuid())
+  name        String
+  description String
+  icon        String         @default("🏆")
+  rarity      String
+  players     PlayerTrophy[]
+}
+
+model PlayerTrophy {
+  id        String   @id @default(cuid())
+  playerId  String
+  player    Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  trophyId  String
+  trophy    Trophy   @relation(fields: [trophyId], references: [id], onDelete: Cascade)
+  awardedAt DateTime @default(now())
+
+  @@unique([playerId, trophyId])
+}
+
+model PlayerStat {
+  id       String   @id @default(cuid())
+  playerId String
+  player   Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  game     String
+  date     DateTime
+  data     String
+}
+
+model Tournament {
+  id         String           @id @default(cuid())
+  name       String
+  season     String
+  year       Int
+  slots      TournamentSlot[]
+  supporters SupporterSlot[]
+}
+
+model TournamentSlot {
+  id           String     @id @default(cuid())
+  tournamentId String
+  tournament   Tournament @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  game         String
+  slotType     String
+  slotIndex    Int
+  playerId     String?
+  player       Player?    @relation(fields: [playerId], references: [id])
+
+  @@unique([tournamentId, game, slotType, slotIndex])
+}
+
+model SupporterSlot {
+  id           String     @id @default(cuid())
+  tournamentId String
+  tournament   Tournament @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  playerId     String
+  player       Player     @relation(fields: [playerId], references: [id])
+
+  @@unique([tournamentId, playerId])
+}
+
+model NewsArticle {
+  id        String   @id @default(cuid())
+  title     String
+  content   String
+  imageUrl  String?
+  createdAt DateTime @default(now())
+}
+
+model CalendarEvent {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  date        DateTime
+  location    String?
+  type        String
+}
