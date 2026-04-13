@@ -5,14 +5,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --neon-blue: #00D4FF;
+  --neon-blue: #A78BFA;
   --neon-purple: #8B5CF6;
-  --neon-pink: #EC4899;
+  --neon-pink: #C084FC;
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: #8B5CF6 #0a0a0f;
+  scrollbar-color: #7C3AED #0a0a0f;
 }
 
 *::-webkit-scrollbar {
@@ -22,7 +22,7 @@
   background: #0a0a0f;
 }
 *::-webkit-scrollbar-thumb {
-  background: #8B5CF6;
+  background: #7C3AED;
   border-radius: 4px;
 }
 
@@ -39,10 +39,10 @@ h1, h2, h3, h4, h5, h6 {
 
 @layer utilities {
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-neon-pink via-neon-purple to-neon-blue;
   }
   .glow-blue {
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), 0 0 40px rgba(0, 212, 255, 0.1);
+    box-shadow: 0 0 20px rgba(167, 139, 250, 0.3), 0 0 40px rgba(167, 139, 250, 0.1);
   }
   .glow-purple {
     box-shadow: 0 0 20px rgba(139, 92, 246, 0.3), 0 0 40px rgba(139, 92, 246, 0.1);
@@ -57,7 +57,7 @@ h1, h2, h3, h4, h5, h6 {
     @apply bg-dark-800 border border-dark-600 rounded-xl overflow-hidden transition-all duration-300;
   }
   .card-gaming:hover {
-    @apply border-neon-blue/50;
-    box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
+    @apply border-neon-purple/50;
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.15);
   }
 }

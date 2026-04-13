@@ -5,7 +5,7 @@ export async function GET() {
   const tournaments = await prisma.tournament.findMany({
     include: {
       slots: { include: { player: true } },
-      supporters: { include: { player: true } },
+      supporters: true,
     },
     orderBy: { year: 'desc' },
   })

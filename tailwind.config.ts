@@ -10,9 +10,9 @@ const config: Config = {
     extend: {
       colors: {
         neon: {
-          blue: '#00D4FF',
+          blue: '#A78BFA',
           purple: '#8B5CF6',
-          pink: '#EC4899',
+          pink: '#C084FC',
         },
         dark: {
           900: '#0a0a0f',
@@ -33,8 +33,8 @@ const config: Config = {
       },
       keyframes: {
         glow: {
-          '0%': { boxShadow: '0 0 5px rgba(0, 212, 255, 0.5), 0 0 20px rgba(0, 212, 255, 0.2)' },
-          '100%': { boxShadow: '0 0 20px rgba(0, 212, 255, 0.8), 0 0 40px rgba(0, 212, 255, 0.4)' },
+          '0%': { boxShadow: '0 0 5px rgba(167, 139, 250, 0.5), 0 0 20px rgba(167, 139, 250, 0.2)' },
+          '100%': { boxShadow: '0 0 20px rgba(167, 139, 250, 0.8), 0 0 40px rgba(167, 139, 250, 0.4)' },
         },
         float: {
           '0%, 100%': { transform: 'translateY(0)' },

@@ -15,9 +15,7 @@ export default async function TournoiEtePage() {
         include: { player: true },
         orderBy: [{ game: 'asc' }, { slotType: 'asc' }, { slotIndex: 'asc' }],
       },
-      supporters: {
-        include: { player: true },
-      },
+      supporters: true,
     },
   })
 

@@ -1,45 +1,34 @@
 'use client'
 
 interface Supporter {
-  player: {
-    pseudo: string
-    firstName: string
-    lastName: string
-    photo: string | null
-  }
+  id: string
+  name: string
 }
 
 interface SupporterGridProps {
   supporters: Supporter[]
-  maxSlots?: number
+  maxSlots: number
 }
 
-export function SupporterGrid({ supporters, maxSlots = 16 }: SupporterGridProps) {
-  const slots = Array.from({ length: maxSlots }, (_, i) => supporters[i] || null)
+export function SupporterGrid({ supporters, maxSlots }: SupporterGridProps) {
+  const emptyCount = Math.max(0, maxSlots - supporters.length)
 
   return (
-    <div className="grid grid-cols-4 sm:grid-cols-8 gap-2">
-      {slots.map((supporter, i) => (
+    <div className="flex flex-wrap gap-2">
+      {supporters.map((s) => (
         <div
-          key={i}
-          className={`flex flex-col items-center p-2 rounded-lg ${
-            supporter ? 'bg-dark-800 border border-dark-600' : 'border border-dashed border-dark-700'
-          }`}
+          key={s.id}
+          className="px-3 py-1.5 rounded-lg bg-dark-800 border border-neon-purple/20 text-sm text-gray-300"
         >
-          <div className="w-8 h-8 rounded-full overflow-hidden mb-1">
-            {supporter ? (
-              <img
-                src={supporter.player.photo || `https://api.dicebear.com/9.x/thumbs/svg?seed=${supporter.player.pseudo}`}
-                alt={supporter.player.pseudo}
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <div className="w-full h-full bg-dark-700 flex items-center justify-center text-gray-600 text-xs">?</div>
-            )}
-          </div>
-          <span className="text-[9px] text-gray-400 truncate w-full text-center">
-            {supporter ? supporter.player.pseudo : 'Libre'}
-          </span>
+          {s.name}
+        </div>
+      ))}
+      {Array.from({ length: emptyCount }).map((_, i) => (
+        <div
+          key={`empty-${i}`}
+          className="px-3 py-1.5 rounded-lg border border-dashed border-dark-600 text-sm text-gray-600 italic"
+        >
+          Libre
         </div>
       ))}
     </div>

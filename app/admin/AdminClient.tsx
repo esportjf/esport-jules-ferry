@@ -215,7 +215,58 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
     }
   }
 
-  const inputClass = 'bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm text-white focus:border-neon-blue focus:outline-none w-full'
+  // ─── Photo upload ───
+  const uploadPhoto = async (playerId: string, file: File) => {
+    if (file.size > 500000) { showMessage('Image trop lourde (max 500KB)'); return }
+    const reader = new FileReader()
+    reader.onload = async () => {
+      const base64 = reader.result as string
+      const res = await fetch(`/api/players/${playerId}/photo`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ photo: base64 }),
+      })
+      if (res.ok) {
+        setPlayers(players.map((p: any) => p.id === playerId ? { ...p, photo: base64 } : p))
+        showMessage('Photo mise à jour !')
+      }
+    }
+    reader.readAsDataURL(file)
+  }
+
+  // ─── Supporters (free text) ───
+  const [supporterName, setSupporterName] = useState('')
+
+  const addSupporter = async (tournamentId: string) => {
+    if (!supporterName.trim()) return
+    const res = await fetch(`/api/tournaments/${tournamentId}/supporters`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: supporterName.trim() }),
+    })
+    if (res.ok) {
+      setSupporterName('')
+      showMessage('Supporter ajouté ! Rafraîchis la page pour voir.')
+      window.location.reload()
+    } else {
+      const err = await res.json()
+      showMessage(err.error || 'Erreur')
+    }
+  }
+
+  const removeSupporter = async (tournamentId: string, supporterId: string) => {
+    const res = await fetch(`/api/tournaments/${tournamentId}/supporters`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: supporterId }),
+    })
+    if (res.ok) {
+      showMessage('Supporter retiré')
+      window.location.reload()
+    }
+  }
+
+  const inputClass = 'bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm text-white focus:border-neon-purple focus:outline-none w-full'
   const btnClass = 'px-4 py-2 rounded-lg bg-gradient-to-r from-neon-blue to-neon-purple text-white text-sm font-bold hover:opacity-90 transition-all disabled:opacity-50'
   const btnDanger = 'px-3 py-1.5 rounded-lg bg-red-500/20 text-red-400 text-xs border border-red-500/30 hover:bg-red-500/30 transition-all'
 
@@ -283,7 +334,13 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
                 {players.map((p: any) => (
                   <div key={p.id} className="card-gaming p-4 flex flex-wrap items-center justify-between gap-3">
                     <div className="flex items-center gap-3">
-                      <img src={p.photo || `https://api.dicebear.com/9.x/thumbs/svg?seed=${p.pseudo}`} className="w-10 h-10 rounded-full" alt="" />
+                      <label className="relative group cursor-pointer">
+                        <img src={p.photo || `https://api.dicebear.com/9.x/thumbs/svg?seed=${p.pseudo}`} className="w-10 h-10 rounded-full" alt="" />
+                        <div className="absolute inset-0 rounded-full bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                          <span className="text-white text-[8px]">Photo</span>
+                        </div>
+                        <input type="file" accept="image/*" className="hidden" onChange={(e) => e.target.files?.[0] && uploadPhoto(p.id, e.target.files[0])} />
+                      </label>
                       <div>
                         <span className="font-gaming text-sm font-bold text-white">{p.pseudo}</span>
                         <span className="text-gray-500 text-xs ml-2">{p.firstName} {p.lastName} — {p.className}</span>
@@ -408,7 +465,9 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
           {tab === 'tournaments' && (
             <div>
               <h2 className="font-gaming text-lg font-bold text-white mb-4">Gestion des Tournois</h2>
-              {tournaments.map((tournament: any) => (
+              {tournaments.map((tournament: any) => {
+                const maxSupporters = tournament.season === 'winter' ? 4 : 16
+                return (
                 <div key={tournament.id} className="mb-10">
                   <h3 className="font-gaming text-base font-bold text-white mb-4">{tournament.name}</h3>
 
@@ -441,8 +500,34 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
                       </div>
                     </div>
                   ))}
+
+                  {/* Supporters section */}
+                  <div className="mt-6">
+                    <h4 className="text-sm font-bold text-gray-300 mb-3">Supporters ({tournament.supporters?.length || 0}/{maxSupporters})</h4>
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {tournament.supporters?.map((s: any) => (
+                        <span key={s.id} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-neon-purple/10 border border-neon-purple/20 text-neon-purple text-xs">
+                          {s.name}
+                          <button onClick={() => removeSupporter(tournament.id, s.id)} className="text-red-400 hover:text-red-300 ml-1">&times;</button>
+                        </span>
+                      ))}
+                    </div>
+                    {(tournament.supporters?.length || 0) < maxSupporters && (
+                      <div className="flex gap-2">
+                        <input
+                          className={inputClass + ' !w-48'}
+                          placeholder="Nom du supporter"
+                          value={supporterName}
+                          onChange={(e) => setSupporterName(e.target.value)}
+                          onKeyDown={(e) => e.key === 'Enter' && addSupporter(tournament.id)}
+                        />
+                        <button onClick={() => addSupporter(tournament.id)} className={btnClass}>Ajouter</button>
+                      </div>
+                    )}
+                  </div>
                 </div>
-              ))}
+                )
+              })}
             </div>
           )}
 

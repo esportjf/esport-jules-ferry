@@ -30,7 +30,6 @@ model Player {
   trophies        PlayerTrophy[]
   stats           PlayerStat[]
   tournamentSlots TournamentSlot[]
-  supporterSlots  SupporterSlot[]
 }
 
 model Rank {
@@ -98,10 +97,7 @@ model SupporterSlot {
   id           String     @id @default(cuid())
   tournamentId String
   tournament   Tournament @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
-  playerId     String
-  player       Player     @relation(fields: [playerId], references: [id])
-
-  @@unique([tournamentId, playerId])
+  name         String
 }
 
 model NewsArticle {

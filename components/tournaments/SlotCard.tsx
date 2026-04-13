@@ -42,7 +42,6 @@ export function SlotCard({ slotType, player, golden = false }: SlotCardProps) {
         {player ? (
           <>
             <p className="font-gaming text-xs font-bold text-white truncate">{player.pseudo}</p>
-            <p className="text-gray-500 text-[10px]">{player.firstName} {player.lastName}</p>
           </>
         ) : (
           <p className="text-gray-600 text-xs italic">Slot vide</p>

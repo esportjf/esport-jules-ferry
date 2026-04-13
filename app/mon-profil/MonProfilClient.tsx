@@ -51,6 +51,7 @@ interface Props {
 export function MonProfilClient({ player, allTrophies }: Props) {
   const [statForm, setStatForm] = useState({ game: player.mainGame || 'lol', date: new Date().toISOString().split('T')[0], data: '' })
   const [message, setMessage] = useState('')
+  const [photo, setPhoto] = useState(player.photo)
   const unlockedIds = new Set(player.trophies.map((t: any) => t.trophy.id))
 
   // Group stats by game
@@ -87,7 +88,25 @@ export function MonProfilClient({ player, allTrophies }: Props) {
     }
   }
 
-  const inputClass = 'bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm text-white focus:border-neon-blue focus:outline-none w-full'
+  const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    if (file.size > 500000) { setMessage('Image trop lourde (max 500KB)'); return }
+    const reader = new FileReader()
+    reader.onload = async () => {
+      const base64 = reader.result as string
+      const res = await fetch(`/api/players/${player.id}/photo`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ photo: base64 }),
+      })
+      if (res.ok) { setPhoto(base64); setMessage('Photo mise à jour !') }
+      else { setMessage('Erreur lors de l\'upload') }
+    }
+    reader.readAsDataURL(file)
+  }
+
+  const inputClass = 'bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm text-white focus:border-neon-purple focus:outline-none w-full'
 
   return (
     <PageTransition>
@@ -104,12 +123,18 @@ export function MonProfilClient({ player, allTrophies }: Props) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-dark-900">
-              <img src={player.photo || `https://api.dicebear.com/9.x/thumbs/svg?seed=${player.pseudo}`} alt="" className="w-full h-full object-cover" />
+            <div className="relative group">
+              <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-dark-900">
+                <img src={photo || `https://api.dicebear.com/9.x/thumbs/svg?seed=${player.pseudo}`} alt="" className="w-full h-full object-cover" />
+              </div>
+              <label className="absolute inset-0 rounded-full bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+                <span className="text-white text-xs">Changer</span>
+                <input type="file" accept="image/*" onChange={handlePhotoUpload} className="hidden" />
+              </label>
             </div>
             <div className="text-center sm:text-left">
               <h1 className="font-gaming text-2xl font-black text-white">{player.pseudo}</h1>
-              <p className="text-gray-400 text-sm">{player.firstName} {player.lastName} — {player.className}</p>
+              <p className="text-gray-400 text-sm">{player.className}</p>
             </div>
           </motion.div>
 

@@ -21,7 +21,7 @@ export default async function AdminPage() {
     prisma.tournament.findMany({
       include: {
         slots: { include: { player: true }, orderBy: [{ game: 'asc' }, { slotType: 'asc' }, { slotIndex: 'asc' }] },
-        supporters: { include: { player: true } },
+        supporters: true,
       },
       orderBy: { year: 'desc' },
     }),

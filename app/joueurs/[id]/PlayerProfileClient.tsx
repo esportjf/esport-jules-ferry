@@ -40,9 +40,9 @@ export function PlayerProfileClient({ player, allTrophies }: { player: PlayerPro
       <div className="pt-24 pb-16">
         {/* Banner */}
         <div className="relative h-48 md:h-64 bg-gradient-to-r from-dark-800 via-dark-700 to-dark-800 overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,212,255,0.1)_0%,transparent_70%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(139,92,246,0.1)_0%,transparent_70%)]" />
           <div className="absolute inset-0 opacity-20" style={{
-            backgroundImage: 'linear-gradient(rgba(0,212,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.05) 1px, transparent 1px)',
+            backgroundImage: 'linear-gradient(rgba(139,92,246,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(139,92,246,0.05) 1px, transparent 1px)',
             backgroundSize: '30px 30px',
           }} />
         </div>
@@ -63,11 +63,10 @@ export function PlayerProfileClient({ player, allTrophies }: { player: PlayerPro
             </div>
             <div className="text-center sm:text-left">
               <h1 className="font-gaming text-2xl sm:text-3xl font-black text-white">{player.pseudo}</h1>
-              <p className="text-gray-400">{player.firstName} {player.lastName}</p>
               <div className="flex items-center gap-2 mt-1">
                 <span className="text-xs px-2 py-0.5 rounded-full bg-dark-700 text-gray-400">{player.className}</span>
                 {player.mainGame && (
-                  <span className="text-xs px-2 py-0.5 rounded-full bg-neon-blue/10 text-neon-blue border border-neon-blue/20">
+                  <span className="text-xs px-2 py-0.5 rounded-full bg-neon-purple/10 text-neon-purple border border-neon-purple/20">
                     {GAME_NAMES[player.mainGame]}
                   </span>
                 )}

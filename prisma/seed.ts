@@ -193,7 +193,6 @@ async function main() {
     })
   }
 
-  // Create 16 supporter slots per tournament (empty)
   console.log('✅ Tournaments created with slots')
 
   // Create news articles

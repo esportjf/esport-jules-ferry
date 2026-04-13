@@ -25,13 +25,7 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-neon-blue to-neon-purple flex items-center justify-center font-gaming text-sm font-bold text-white">
-              JF
-            </div>
-            <span className="font-gaming text-sm font-bold hidden sm:block">
-              <span className="text-gradient">E-SPORT</span>
-              <span className="text-gray-400 text-xs ml-1">JF</span>
-            </span>
+            <img src="/logo.png" alt="E-Sport JF" className="h-9 w-auto" />
           </Link>
 
           {/* Desktop Nav */}
@@ -44,7 +38,7 @@ export function Navbar() {
                   href={link.href}
                   className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                     isActive
-                      ? 'text-neon-blue bg-neon-blue/10'
+                      ? 'text-neon-purple bg-neon-purple/10'
                       : 'text-gray-400 hover:text-white hover:bg-dark-700'
                   }`}
                 >
@@ -84,7 +78,7 @@ export function Navbar() {
             ) : (
               <Link
                 href="/login"
-                className="text-sm px-4 py-2 rounded-lg bg-gradient-to-r from-neon-blue to-neon-purple text-white font-medium hover:shadow-lg hover:shadow-neon-blue/25 transition-all duration-300"
+                className="text-sm px-4 py-2 rounded-lg bg-gradient-to-r from-neon-blue to-neon-purple text-white font-medium hover:shadow-lg hover:shadow-neon-purple/25 transition-all duration-300"
               >
                 Connexion
               </Link>
@@ -124,7 +118,7 @@ export function Navbar() {
                   onClick={() => setMobileOpen(false)}
                   className={`block px-3 py-2 rounded-lg text-sm ${
                     pathname === link.href
-                      ? 'text-neon-blue bg-neon-blue/10'
+                      ? 'text-neon-purple bg-neon-purple/10'
                       : 'text-gray-400 hover:text-white'
                   }`}
                 >

@@ -8,10 +8,7 @@ export function Footer() {
           {/* Brand */}
           <div className="md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-neon-blue to-neon-purple flex items-center justify-center font-gaming text-sm font-bold text-white">
-                JF
-              </div>
-              <span className="font-gaming text-sm font-bold text-gradient">E-SPORT JF</span>
+              <img src="/logo.png" alt="E-Sport JF" className="h-8 w-auto" />
             </div>
             <p className="text-gray-500 text-sm leading-relaxed">
               Section e-sport du Lycée Jules Ferry, Versailles. Projet Educ Esport — France 2030.
@@ -30,7 +27,7 @@ export function Footer() {
                 { href: '/tournoi/ete', label: 'Tournoi Été' },
               ].map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-gray-500 hover:text-neon-blue text-sm transition-colors">
+                  <Link href={link.href} className="text-gray-500 hover:text-neon-purple text-sm transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -60,7 +57,7 @@ export function Footer() {
               <li>Lycée Jules Ferry</li>
               <li>Versailles, France</li>
               <li>
-                <a href="mailto:esportjf@gmail.com" className="hover:text-neon-blue transition-colors">
+                <a href="mailto:esportjf@gmail.com" className="hover:text-neon-purple transition-colors">
                   esportjf@gmail.com
                 </a>
               </li>
@@ -76,7 +73,7 @@ export function Footer() {
             &copy; {new Date().getFullYear()} Section E-sport Lycée Jules Ferry. Tous droits réservés.
           </p>
           <div className="flex items-center gap-4">
-            <a href="https://educ-esport.fr/" target="_blank" rel="noopener noreferrer" className="text-xs text-gray-500 hover:text-neon-blue transition-colors">
+            <a href="https://educ-esport.fr/" target="_blank" rel="noopener noreferrer" className="text-xs text-gray-500 hover:text-neon-purple transition-colors">
               Projet Educ Esport — France 2030
             </a>
           </div>
