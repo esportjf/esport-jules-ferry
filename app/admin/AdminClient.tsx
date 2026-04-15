@@ -28,7 +28,7 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
   const [tab, setTab] = useState('players')
   const [players, setPlayers] = useState(initialPlayers)
   const [trophies, setTrophies] = useState(initialTrophies)
-  const [tournaments] = useState(initialTournaments)
+  const [tournaments, setTournaments] = useState(initialTournaments)
   const [news, setNews] = useState(initialNews)
   const [events, setEvents] = useState(initialEvents)
   const [loading, setLoading] = useState(false)
@@ -147,8 +147,14 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
       body: JSON.stringify({ slotId, playerId }),
     })
     if (res.ok) {
+      const updatedSlot = await res.json()
+      setTournaments(tournaments.map((t: any) =>
+        t.id !== tournamentId ? t : {
+          ...t,
+          slots: t.slots.map((s: any) => s.id === slotId ? updatedSlot : s),
+        }
+      ))
       showMessage('Slot mis à jour !')
-      window.location.reload()
     } else {
       const err = await res.json()
       showMessage(err.error || 'Erreur')
@@ -245,9 +251,12 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
       body: JSON.stringify({ name: supporterName.trim() }),
     })
     if (res.ok) {
+      const newSupporter = await res.json()
+      setTournaments(tournaments.map((t: any) =>
+        t.id !== tournamentId ? t : { ...t, supporters: [...(t.supporters || []), newSupporter] }
+      ))
       setSupporterName('')
-      showMessage('Supporter ajouté ! Rafraîchis la page pour voir.')
-      window.location.reload()
+      showMessage('Supporter ajouté !')
     } else {
       const err = await res.json()
       showMessage(err.error || 'Erreur')
@@ -261,8 +270,10 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
       body: JSON.stringify({ id: supporterId }),
     })
     if (res.ok) {
+      setTournaments(tournaments.map((t: any) =>
+        t.id !== tournamentId ? t : { ...t, supporters: (t.supporters || []).filter((s: any) => s.id !== supporterId) }
+      ))
       showMessage('Supporter retiré')
-      window.location.reload()
     }
   }
 
@@ -428,7 +439,7 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <select id="assign-player" className={inputClass}>
                     <option value="">Choisir un joueur</option>
-                    {players.map((p: any) => <option key={p.id} value={p.id}>{p.pseudo}</option>)}
+                    {players.map((p: any) => <option key={p.id} value={p.id}>{p.lastName} {p.firstName}</option>)}
                   </select>
                   <select id="assign-trophy" className={inputClass}>
                     <option value="">Choisir un trophée</option>
@@ -492,7 +503,7 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
                             >
                               <option value="">— Vide —</option>
                               {players.map((p: any) => (
-                                <option key={p.id} value={p.id}>{p.pseudo}</option>
+                                <option key={p.id} value={p.id}>{p.lastName} {p.firstName}</option>
                               ))}
                             </select>
                           </div>
