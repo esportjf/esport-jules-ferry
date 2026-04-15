@@ -1,6 +1,8 @@
 import { prisma } from '@/lib/prisma'
 import { TournoiHiverClient } from './TournoiHiverClient'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata = {
   title: 'Tournoi d\'Hiver — Section E-sport Lycée Jules Ferry',
   description: 'Le Tournoi d\'Hiver du Campus Cyber : sélection, format et équipes.',

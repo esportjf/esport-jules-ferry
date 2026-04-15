@@ -2,6 +2,8 @@ import { prisma } from '@/lib/prisma'
 import { notFound } from 'next/navigation'
 import { PlayerProfileClient } from './PlayerProfileClient'
 
+export const dynamic = 'force-dynamic'
+
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const player = await prisma.player.findUnique({ where: { id: params.id } })
   if (!player) return { title: 'Joueur introuvable' }
