@@ -277,9 +277,31 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
     }
   }
 
+  const downloadCSV = (headers: string[], rows: string[][], filename: string) => {
+    const escape = (val: string) => {
+      const s = String(val ?? '')
+      if (s.includes(';') || s.includes('"') || s.includes('\n')) {
+        return `"${s.replace(/"/g, '""')}"`
+      }
+      return s
+    }
+    const csv = [
+      headers.map(escape).join(';'),
+      ...rows.map(row => row.map(escape).join(';'))
+    ].join('\r\n')
+    const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = filename
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
   const inputClass = 'bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm text-white focus:border-neon-purple focus:outline-none w-full'
   const btnClass = 'px-4 py-2 rounded-lg bg-gradient-to-r from-neon-blue to-neon-purple text-white text-sm font-bold hover:opacity-90 transition-all disabled:opacity-50'
   const btnDanger = 'px-3 py-1.5 rounded-lg bg-red-500/20 text-red-400 text-xs border border-red-500/30 hover:bg-red-500/30 transition-all'
+  const btnExport = 'px-3 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-400 text-xs font-bold border border-emerald-500/30 hover:bg-emerald-500/30 transition-all'
 
   return (
     <PageTransition>
@@ -322,7 +344,14 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
           {/* ─── PLAYERS TAB ─── */}
           {tab === 'players' && (
             <div>
-              <h2 className="font-gaming text-lg font-bold text-white mb-4">Gestion des Joueurs</h2>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="font-gaming text-lg font-bold text-white">Gestion des Joueurs</h2>
+                <button onClick={() => downloadCSV(
+                  ['Nom', 'Prénom', 'Pseudo', 'Classe', 'Jeu principal'],
+                  players.map((p: any) => [p.lastName, p.firstName, p.pseudo, p.className, GAME_NAMES[p.mainGame] || '']),
+                  'joueurs.csv'
+                )} className={btnExport}>Exporter CSV</button>
+              </div>
 
               {/* Add form */}
               <div className="card-gaming p-4 mb-6">
@@ -382,7 +411,14 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
           {/* ─── RANKS TAB ─── */}
           {tab === 'ranks' && (
             <div>
-              <h2 className="font-gaming text-lg font-bold text-white mb-4">Attribution des Rangs</h2>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="font-gaming text-lg font-bold text-white">Attribution des Rangs</h2>
+                <button onClick={() => downloadCSV(
+                  ['Nom', 'Prénom', 'Pseudo', ...ALL_GAMES.map(g => GAME_NAMES[g])],
+                  players.map((p: any) => [p.lastName, p.firstName, p.pseudo, ...ALL_GAMES.map(g => p.ranks.find((r: any) => r.game === g)?.rank || 'Non classé')]),
+                  'rangs.csv'
+                )} className={btnExport}>Exporter CSV</button>
+              </div>
               <div className="space-y-3">
                 {players.map((p: any) => (
                   <div key={p.id} className="card-gaming p-4">
@@ -417,7 +453,14 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
           {/* ─── TROPHIES TAB ─── */}
           {tab === 'trophies' && (
             <div>
-              <h2 className="font-gaming text-lg font-bold text-white mb-4">Gestion des Trophées</h2>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="font-gaming text-lg font-bold text-white">Gestion des Trophées</h2>
+                <button onClick={() => downloadCSV(
+                  ['Trophée', 'Description', 'Rareté', 'Icône'],
+                  trophies.map((t: any) => [t.name, t.description, t.rarity, t.icon]),
+                  'trophees.csv'
+                )} className={btnExport}>Exporter CSV</button>
+              </div>
 
               {/* Create trophy */}
               <div className="card-gaming p-4 mb-6">
@@ -475,7 +518,17 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
           {/* ─── TOURNAMENTS TAB ─── */}
           {tab === 'tournaments' && (
             <div>
-              <h2 className="font-gaming text-lg font-bold text-white mb-4">Gestion des Tournois</h2>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="font-gaming text-lg font-bold text-white">Gestion des Tournois</h2>
+                <button onClick={() => downloadCSV(
+                  ['Tournoi', 'Jeu', 'Rôle', 'Nom', 'Prénom'],
+                  tournaments.flatMap((t: any) => t.slots.map((s: any) => {
+                    const player = s.playerId ? players.find((p: any) => p.id === s.playerId) : null
+                    return [t.name, GAME_NAMES[s.game] || s.game, s.slotType, player?.lastName || '', player?.firstName || '']
+                  })),
+                  'tournois.csv'
+                )} className={btnExport}>Exporter CSV</button>
+              </div>
               {tournaments.map((tournament: any) => {
                 const maxSupporters = tournament.season === 'winter' ? 4 : 16
                 return (
@@ -545,7 +598,14 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
           {/* ─── NEWS TAB ─── */}
           {tab === 'news' && (
             <div>
-              <h2 className="font-gaming text-lg font-bold text-white mb-4">Gestion des Actualités</h2>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="font-gaming text-lg font-bold text-white">Gestion des Actualités</h2>
+                <button onClick={() => downloadCSV(
+                  ['Titre', 'Contenu', 'Date'],
+                  news.map((n: any) => [n.title, n.content, n.createdAt ? new Date(n.createdAt).toLocaleDateString('fr-FR') : '']),
+                  'actualites.csv'
+                )} className={btnExport}>Exporter CSV</button>
+              </div>
 
               <div className="card-gaming p-4 mb-6">
                 <h3 className="text-sm font-bold text-gray-300 mb-3">Ajouter un article</h3>
@@ -574,7 +634,14 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
           {/* ─── CALENDAR TAB ─── */}
           {tab === 'calendar' && (
             <div>
-              <h2 className="font-gaming text-lg font-bold text-white mb-4">Gestion du Calendrier</h2>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="font-gaming text-lg font-bold text-white">Gestion du Calendrier</h2>
+                <button onClick={() => downloadCSV(
+                  ['Titre', 'Description', 'Date', 'Lieu', 'Type'],
+                  events.map((e: any) => [e.title, e.description || '', new Date(e.date).toLocaleDateString('fr-FR'), e.location || '', e.type]),
+                  'calendrier.csv'
+                )} className={btnExport}>Exporter CSV</button>
+              </div>
 
               <div className="card-gaming p-4 mb-6">
                 <h3 className="text-sm font-bold text-gray-300 mb-3">Ajouter un événement</h3>
