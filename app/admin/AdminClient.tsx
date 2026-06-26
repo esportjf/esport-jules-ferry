@@ -298,8 +298,8 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
     URL.revokeObjectURL(url)
   }
 
-  const inputClass = 'bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm text-white focus:border-neon-purple focus:outline-none w-full'
-  const btnClass = 'px-4 py-2 rounded-lg bg-gradient-to-r from-neon-blue to-neon-purple text-white text-sm font-bold hover:opacity-90 transition-all disabled:opacity-50'
+  const inputClass = 'bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm text-lavender placeholder-lavender/25 focus:border-neon-purple focus:outline-none w-full'
+  const btnClass = 'px-4 py-2 rounded-lg bg-gradient-to-r from-neon-blue to-neon-purple text-lavender text-sm font-bold hover:opacity-90 transition-all disabled:opacity-50'
   const btnDanger = 'px-3 py-1.5 rounded-lg bg-red-500/20 text-red-400 text-xs border border-red-500/30 hover:bg-red-500/30 transition-all'
   const btnExport = 'px-3 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-400 text-xs font-bold border border-emerald-500/30 hover:bg-emerald-500/30 transition-all'
 
@@ -308,7 +308,7 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
       <div className="pt-24 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h1
-            className="font-gaming text-2xl sm:text-3xl font-black text-white mb-6"
+            className="font-gaming text-2xl sm:text-3xl font-black text-lavender mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
@@ -333,7 +333,7 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
                 key={t.id}
                 onClick={() => setTab(t.id)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                  tab === t.id ? 'bg-neon-blue/20 text-neon-blue' : 'text-gray-500 hover:text-white'
+                  tab === t.id ? 'bg-neon-blue/20 text-neon-blue' : 'text-lavender/40 hover:text-lavender'
                 }`}
               >
                 {t.label}
@@ -345,7 +345,7 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
           {tab === 'players' && (
             <div>
               <div className="flex items-center justify-between mb-4">
-                <h2 className="font-gaming text-lg font-bold text-white">Gestion des Joueurs</h2>
+                <h2 className="font-gaming text-lg font-bold text-lavender">Gestion des Joueurs</h2>
                 <button onClick={() => downloadCSV(
                   ['Nom', 'Prénom', 'Pseudo', 'Classe', 'Jeu principal'],
                   players.map((p: any) => [p.lastName, p.firstName, p.pseudo, p.className, GAME_NAMES[p.mainGame] || '']),
@@ -355,7 +355,7 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
 
               {/* Add form */}
               <div className="card-gaming p-4 mb-6">
-                <h3 className="text-sm font-bold text-gray-300 mb-3">Ajouter un joueur</h3>
+                <h3 className="text-sm font-bold text-lavender/70 mb-3">Ajouter un joueur</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                   <input className={inputClass} placeholder="Prénom" value={playerForm.firstName} onChange={(e) => setPlayerForm({ ...playerForm, firstName: e.target.value })} />
                   <input className={inputClass} placeholder="Nom" value={playerForm.lastName} onChange={(e) => setPlayerForm({ ...playerForm, lastName: e.target.value })} />
@@ -377,13 +377,13 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
                       <label className="relative group cursor-pointer">
                         <img src={p.photo || `https://api.dicebear.com/9.x/thumbs/svg?seed=${p.pseudo}`} className="w-10 h-10 rounded-full" alt="" />
                         <div className="absolute inset-0 rounded-full bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                          <span className="text-white text-[8px]">Photo</span>
+                          <span className="text-lavender text-[8px]">Photo</span>
                         </div>
                         <input type="file" accept="image/*" className="hidden" onChange={(e) => e.target.files?.[0] && uploadPhoto(p.id, e.target.files[0])} />
                       </label>
                       <div>
-                        <span className="font-gaming text-sm font-bold text-white">{p.pseudo}</span>
-                        <span className="text-gray-500 text-xs ml-2">{p.firstName} {p.lastName} — {p.className}</span>
+                        <span className="font-gaming text-sm font-bold text-lavender">{p.pseudo}</span>
+                        <span className="text-lavender/40 text-xs ml-2">{p.firstName} {p.lastName} — {p.className}</span>
                       </div>
                     </div>
                     <div className="flex gap-2">
@@ -393,10 +393,10 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
                             onBlur={(e) => updatePlayer(p.id, { className: e.target.value })}
                             onKeyDown={(e) => e.key === 'Enter' && updatePlayer(p.id, { className: (e.target as HTMLInputElement).value })}
                           />
-                          <button onClick={() => setEditingPlayer(null)} className="text-gray-500 text-xs">Annuler</button>
+                          <button onClick={() => setEditingPlayer(null)} className="text-lavender/40 text-xs">Annuler</button>
                         </div>
                       ) : (
-                        <button onClick={() => setEditingPlayer(p.id)} className="text-xs px-3 py-1.5 rounded-lg bg-dark-700 text-gray-400 hover:text-white transition-all">
+                        <button onClick={() => setEditingPlayer(p.id)} className="text-xs px-3 py-1.5 rounded-lg bg-dark-700 text-lavender/50 hover:text-lavender transition-all">
                           Modifier
                         </button>
                       )}
@@ -412,7 +412,7 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
           {tab === 'ranks' && (
             <div>
               <div className="flex items-center justify-between mb-4">
-                <h2 className="font-gaming text-lg font-bold text-white">Attribution des Rangs</h2>
+                <h2 className="font-gaming text-lg font-bold text-lavender">Attribution des Rangs</h2>
                 <button onClick={() => downloadCSV(
                   ['Nom', 'Prénom', 'Pseudo', ...ALL_GAMES.map(g => GAME_NAMES[g])],
                   players.map((p: any) => [p.lastName, p.firstName, p.pseudo, ...ALL_GAMES.map(g => p.ranks.find((r: any) => r.game === g)?.rank || 'Non classé')]),
@@ -424,14 +424,14 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
                   <div key={p.id} className="card-gaming p-4">
                     <div className="flex items-center gap-3 mb-3">
                       <img src={p.photo || `https://api.dicebear.com/9.x/thumbs/svg?seed=${p.pseudo}`} className="w-8 h-8 rounded-full" alt="" />
-                      <span className="font-gaming text-sm font-bold text-white">{p.pseudo}</span>
+                      <span className="font-gaming text-sm font-bold text-lavender">{p.pseudo}</span>
                     </div>
                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
                       {ALL_GAMES.map((game) => {
                         const currentRank = p.ranks.find((r: any) => r.game === game)?.rank || ''
                         return (
                           <div key={game}>
-                            <label className="text-[10px] text-gray-500 block mb-1">{GAME_NAMES[game]}</label>
+                            <label className="text-[10px] text-lavender/40 block mb-1">{GAME_NAMES[game]}</label>
                             <select
                               className={inputClass + ' !text-xs !py-1.5'}
                               value={currentRank}
@@ -454,7 +454,7 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
           {tab === 'trophies' && (
             <div>
               <div className="flex items-center justify-between mb-4">
-                <h2 className="font-gaming text-lg font-bold text-white">Gestion des Trophées</h2>
+                <h2 className="font-gaming text-lg font-bold text-lavender">Gestion des Trophées</h2>
                 <button onClick={() => downloadCSV(
                   ['Trophée', 'Description', 'Rareté', 'Icône'],
                   trophies.map((t: any) => [t.name, t.description, t.rarity, t.icon]),
@@ -464,7 +464,7 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
 
               {/* Create trophy */}
               <div className="card-gaming p-4 mb-6">
-                <h3 className="text-sm font-bold text-gray-300 mb-3">Créer un trophée</h3>
+                <h3 className="text-sm font-bold text-lavender/70 mb-3">Créer un trophée</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
                   <input className={inputClass} placeholder="Nom" value={trophyForm.name} onChange={(e) => setTrophyForm({ ...trophyForm, name: e.target.value })} />
                   <input className={inputClass} placeholder="Description" value={trophyForm.description} onChange={(e) => setTrophyForm({ ...trophyForm, description: e.target.value })} />
@@ -478,7 +478,7 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
 
               {/* Assign trophy */}
               <div className="card-gaming p-4 mb-6">
-                <h3 className="text-sm font-bold text-gray-300 mb-3">Attribuer un trophée</h3>
+                <h3 className="text-sm font-bold text-lavender/70 mb-3">Attribuer un trophée</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <select id="assign-player" className={inputClass}>
                     <option value="">Choisir un joueur</option>
@@ -507,7 +507,7 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
                   <div key={t.id} className="card-gaming p-3 text-center">
                     <div className="text-2xl mb-1">{t.icon}</div>
                     <h4 className="font-gaming text-xs font-bold" style={{ color: RARITY_COLORS[t.rarity] }}>{t.name}</h4>
-                    <p className="text-gray-500 text-[10px] mt-1">{t.description}</p>
+                    <p className="text-lavender/40 text-[10px] mt-1">{t.description}</p>
                     <span className="text-[9px] mt-1 block" style={{ color: RARITY_COLORS[t.rarity] }}>{t.rarity}</span>
                   </div>
                 ))}
@@ -519,7 +519,7 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
           {tab === 'tournaments' && (
             <div>
               <div className="flex items-center justify-between mb-4">
-                <h2 className="font-gaming text-lg font-bold text-white">Gestion des Tournois</h2>
+                <h2 className="font-gaming text-lg font-bold text-lavender">Gestion des Tournois</h2>
                 <button onClick={() => downloadCSV(
                   ['Tournoi', 'Jeu', 'Rôle', 'Nom', 'Prénom'],
                   tournaments.flatMap((t: any) => t.slots.map((s: any) => {
@@ -533,7 +533,7 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
                 const maxSupporters = tournament.season === 'winter' ? 4 : 16
                 return (
                 <div key={tournament.id} className="mb-10">
-                  <h3 className="font-gaming text-base font-bold text-white mb-4">{tournament.name}</h3>
+                  <h3 className="font-gaming text-base font-bold text-lavender mb-4">{tournament.name}</h3>
 
                   {/* Group slots by game */}
                   {Object.entries(
@@ -544,11 +544,11 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
                     }, {})
                   ).map(([game, slots]: [string, any]) => (
                     <div key={game} className="mb-4">
-                      <h4 className="text-sm text-gray-400 mb-2">{GAME_NAMES[game]}</h4>
+                      <h4 className="text-sm text-lavender/50 mb-2">{GAME_NAMES[game]}</h4>
                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
                         {slots.map((slot: any) => (
                           <div key={slot.id} className="card-gaming p-3 flex items-center gap-2">
-                            <span className="text-[10px] text-gray-500 w-24">{slot.slotType}</span>
+                            <span className="text-[10px] text-lavender/40 w-24">{slot.slotType}</span>
                             <select
                               className={inputClass + ' !text-xs !py-1'}
                               value={slot.playerId || ''}
@@ -567,7 +567,7 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
 
                   {/* Supporters section */}
                   <div className="mt-6">
-                    <h4 className="text-sm font-bold text-gray-300 mb-3">Supporters ({tournament.supporters?.length || 0}/{maxSupporters})</h4>
+                    <h4 className="text-sm font-bold text-lavender/70 mb-3">Supporters ({tournament.supporters?.length || 0}/{maxSupporters})</h4>
                     <div className="flex flex-wrap gap-2 mb-3">
                       {tournament.supporters?.map((s: any) => (
                         <span key={s.id} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-neon-purple/10 border border-neon-purple/20 text-neon-purple text-xs">
@@ -599,7 +599,7 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
           {tab === 'news' && (
             <div>
               <div className="flex items-center justify-between mb-4">
-                <h2 className="font-gaming text-lg font-bold text-white">Gestion des Actualités</h2>
+                <h2 className="font-gaming text-lg font-bold text-lavender">Gestion des Actualités</h2>
                 <button onClick={() => downloadCSV(
                   ['Titre', 'Contenu', 'Date'],
                   news.map((n: any) => [n.title, n.content, n.createdAt ? new Date(n.createdAt).toLocaleDateString('fr-FR') : '']),
@@ -608,7 +608,7 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
               </div>
 
               <div className="card-gaming p-4 mb-6">
-                <h3 className="text-sm font-bold text-gray-300 mb-3">Ajouter un article</h3>
+                <h3 className="text-sm font-bold text-lavender/70 mb-3">Ajouter un article</h3>
                 <div className="grid grid-cols-1 gap-3">
                   <input className={inputClass} placeholder="Titre" value={newsForm.title} onChange={(e) => setNewsForm({ ...newsForm, title: e.target.value })} />
                   <textarea className={inputClass + ' min-h-[80px]'} placeholder="Contenu" value={newsForm.content} onChange={(e) => setNewsForm({ ...newsForm, content: e.target.value })} />
@@ -621,8 +621,8 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
                 {news.map((article: any) => (
                   <div key={article.id} className="card-gaming p-4 flex items-center justify-between">
                     <div>
-                      <h4 className="text-sm font-bold text-white">{article.title}</h4>
-                      <p className="text-gray-500 text-xs mt-1 line-clamp-1">{article.content}</p>
+                      <h4 className="text-sm font-bold text-lavender">{article.title}</h4>
+                      <p className="text-lavender/40 text-xs mt-1 line-clamp-1">{article.content}</p>
                     </div>
                     <button onClick={() => deleteNews(article.id)} className={btnDanger}>Supprimer</button>
                   </div>
@@ -635,7 +635,7 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
           {tab === 'calendar' && (
             <div>
               <div className="flex items-center justify-between mb-4">
-                <h2 className="font-gaming text-lg font-bold text-white">Gestion du Calendrier</h2>
+                <h2 className="font-gaming text-lg font-bold text-lavender">Gestion du Calendrier</h2>
                 <button onClick={() => downloadCSV(
                   ['Titre', 'Description', 'Date', 'Lieu', 'Type'],
                   events.map((e: any) => [e.title, e.description || '', new Date(e.date).toLocaleDateString('fr-FR'), e.location || '', e.type]),
@@ -644,7 +644,7 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
               </div>
 
               <div className="card-gaming p-4 mb-6">
-                <h3 className="text-sm font-bold text-gray-300 mb-3">Ajouter un événement</h3>
+                <h3 className="text-sm font-bold text-lavender/70 mb-3">Ajouter un événement</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                   <input className={inputClass} placeholder="Titre" value={eventForm.title} onChange={(e) => setEventForm({ ...eventForm, title: e.target.value })} />
                   <input className={inputClass} placeholder="Description" value={eventForm.description} onChange={(e) => setEventForm({ ...eventForm, description: e.target.value })} />
@@ -670,8 +670,8 @@ export function AdminClient({ initialPlayers, initialTrophies, initialTournament
                       }`}>
                         {event.type}
                       </span>
-                      <span className="text-sm font-bold text-white">{event.title}</span>
-                      <span className="text-gray-500 text-xs ml-2">{new Date(event.date).toLocaleDateString('fr-FR')}</span>
+                      <span className="text-sm font-bold text-lavender">{event.title}</span>
+                      <span className="text-lavender/40 text-xs ml-2">{new Date(event.date).toLocaleDateString('fr-FR')}</span>
                     </div>
                     <button onClick={() => deleteEvent(event.id)} className={btnDanger}>Supprimer</button>
                   </div>

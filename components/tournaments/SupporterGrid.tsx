@@ -18,7 +18,7 @@ export function SupporterGrid({ supporters, maxSlots }: SupporterGridProps) {
       {supporters.map((s) => (
         <div
           key={s.id}
-          className="px-3 py-1.5 rounded-lg bg-dark-800 border border-neon-purple/20 text-sm text-gray-300"
+          className="px-3 py-1.5 rounded-lg bg-dark-800 border border-neon-purple/25 text-sm text-lavender/70"
         >
           {s.name}
         </div>
@@ -26,7 +26,7 @@ export function SupporterGrid({ supporters, maxSlots }: SupporterGridProps) {
       {Array.from({ length: emptyCount }).map((_, i) => (
         <div
           key={`empty-${i}`}
-          className="px-3 py-1.5 rounded-lg border border-dashed border-dark-600 text-sm text-gray-600 italic"
+          className="px-3 py-1.5 rounded-lg border border-dashed border-dark-600 text-sm text-lavender/25 italic"
         >
           Libre
         </div>

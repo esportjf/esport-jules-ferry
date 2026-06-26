@@ -32,7 +32,7 @@ export function PlayerCard({ player, index }: PlayerCardProps) {
         <div className="card-gaming p-4 group cursor-pointer h-full">
           {/* Avatar */}
           <div className="relative mb-3 flex justify-center">
-            <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-dark-600 group-hover:border-neon-purple/50 transition-all duration-300">
+            <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-dark-600 group-hover:border-neon-blue/60 transition-all duration-300">
               <img
                 src={player.photo || `https://api.dicebear.com/9.x/thumbs/svg?seed=${player.pseudo}`}
                 alt={player.pseudo}
@@ -43,15 +43,15 @@ export function PlayerCard({ player, index }: PlayerCardProps) {
 
           {/* Info */}
           <div className="text-center">
-            <h3 className="font-gaming text-sm font-bold text-white group-hover:text-neon-purple transition-colors">
+            <h3 className="font-gaming text-sm font-bold text-lavender group-hover:text-neon-blue transition-colors">
               {player.pseudo}
             </h3>
-            <p className="text-gray-600 text-xs">{player.className}</p>
+            <p className="font-mono text-lavender/30 text-xs">{player.className}</p>
 
             {/* Main game + rank */}
             {player.mainGame && (
               <div className="mt-3 flex flex-col items-center gap-1">
-                <span className="text-[10px] text-gray-500 uppercase tracking-wider">
+                <span className="text-[10px] text-lavender/40 uppercase tracking-widest font-mono">
                   {GAME_NAMES[player.mainGame]}
                 </span>
                 {mainRank && (

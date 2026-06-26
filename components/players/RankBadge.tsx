@@ -43,7 +43,7 @@ export function RankBadge({ game, rank, showGame = true, size = 'md' }: RankBadg
       <span>{icon}</span>
       <span>{rank}</span>
       {showGame && (
-        <span className="text-gray-500 text-xs ml-1">— {GAME_NAMES[game] || game}</span>
+        <span className="text-lavender/40 text-xs ml-1">— {GAME_NAMES[game] || game}</span>
       )}
     </div>
   )

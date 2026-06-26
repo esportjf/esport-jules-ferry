@@ -26,14 +26,14 @@ const GAME_ORDER = ['smash', 'mario_kart', 'fc26', 'rocket_league', 'lol', 'valo
 function PlayerSlot({ slot }: { slot: Slot }) {
   return (
     <div className="flex items-center gap-2 p-2 rounded-lg bg-dark-900/50">
-      <div className={`w-9 h-9 rounded-full overflow-hidden flex-shrink-0 ${!slot.player ? 'border border-dashed border-gray-600' : ''}`}>
+      <div className={`w-9 h-9 rounded-full overflow-hidden flex-shrink-0 ${!slot.player ? 'border border-dashed border-lavender/20' : ''}`}>
         {slot.player ? (
           <img src={slot.player.photo || `https://api.dicebear.com/9.x/thumbs/svg?seed=${slot.player.pseudo}`} alt="" className="w-full h-full object-cover" />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-dark-900 text-gray-600 text-sm">?</div>
+          <div className="w-full h-full flex items-center justify-center bg-dark-900 text-lavender/30 text-sm">?</div>
         )}
       </div>
-      <span className="font-gaming text-xs font-bold text-white truncate">{slot.player?.pseudo || '—'}</span>
+      <span className="font-gaming text-xs font-bold text-lavender truncate">{slot.player?.pseudo || '—'}</span>
     </div>
   )
 }
@@ -43,7 +43,7 @@ export function TournoiEteClient({ tournament }: { tournament: TournamentData | 
     return (
       <PageTransition>
         <div className="pt-24 pb-16 text-center">
-          <p className="text-gray-500">Aucun tournoi d&apos;été n&apos;a encore été créé.</p>
+          <p className="text-lavender/40">Aucun tournoi d&apos;été n&apos;a encore été créé.</p>
         </div>
       </PageTransition>
     )
@@ -59,15 +59,15 @@ export function TournoiEteClient({ tournament }: { tournament: TournamentData | 
     <PageTransition>
       <div className="pt-24 pb-16">
         <div className="relative py-16 mb-10 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-900/20 via-dark-800 to-purple-900/20" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(139,92,246,0.08)_0%,transparent_60%)]" />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, rgba(123,63,228,0.18) 0%, rgba(13,11,31,1) 50%, rgba(224,64,251,0.16) 100%)' }} />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(224,64,251,0.12)_0%,transparent_60%)]" />
           <div className="relative max-w-4xl mx-auto px-4 text-center">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
               <span className="text-5xl mb-4 block">☀️</span>
-              <h1 className="font-gaming text-3xl sm:text-4xl font-black text-white mb-2">{tournament.name}</h1>
-              <p className="text-gray-400 mb-4">Athletica — Eaubonne</p>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-purple/10 border border-neon-purple/20">
-                <span className="text-neon-purple text-sm font-medium">24 joueurs + 16 supporters — 6 jeux</span>
+              <h1 className="font-gaming text-3xl sm:text-4xl font-black text-lavender mb-2">{tournament.name}</h1>
+              <p className="text-lavender/50 mb-4">Athletica — Eaubonne</p>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-pink/10 border border-neon-pink/25">
+                <span className="font-mono text-neon-pink text-sm tracking-wide">24 joueurs + 16 supporters — 6 jeux</span>
               </div>
             </motion.div>
           </div>
@@ -104,11 +104,11 @@ export function TournoiEteClient({ tournament }: { tournament: TournamentData | 
                         <span className="text-[10px] font-bold text-neon-purple uppercase tracking-wider mb-3 block">Binôme mixte</span>
                         <div className="grid grid-cols-2 gap-3">
                           <div>
-                            <span className="text-[10px] text-gray-500 block mb-1">Garçon</span>
+                            <span className="font-mono text-[10px] text-lavender/40 block mb-1">Garçon</span>
                             <PlayerSlot slot={binomeBoy} />
                           </div>
                           <div>
-                            <span className="text-[10px] text-gray-500 block mb-1">Fille</span>
+                            <span className="text-[10px] text-lavender/40 block mb-1">Fille</span>
                             <PlayerSlot slot={binomeGirl} />
                           </div>
                         </div>
@@ -120,7 +120,7 @@ export function TournoiEteClient({ tournament }: { tournament: TournamentData | 
                       <div className="grid grid-cols-2 gap-3">
                         {solos.map((slot) => (
                           <div key={slot.id} className="card-gaming p-3">
-                            <span className="text-[10px] text-gray-500 block mb-1">Solo</span>
+                            <span className="text-[10px] text-lavender/40 block mb-1">Solo</span>
                             <PlayerSlot slot={slot} />
                           </div>
                         ))}

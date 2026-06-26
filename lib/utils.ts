@@ -42,7 +42,7 @@ export const RANK_COLORS: Record<string, string> = {
 export const RARITY_COLORS: Record<string, string> = {
   'Commun': '#9CA3AF',
   'Rare': '#3B82F6',
-  'Épique': '#8B5CF6',
+  'Épique': '#7B3FE4',
   'Légendaire': '#F59E0B',
 }
 

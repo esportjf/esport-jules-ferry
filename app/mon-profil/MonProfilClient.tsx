@@ -15,31 +15,31 @@ const STAT_KEYS: Record<string, { key: string; label: string; color: string }[]>
   lol: [
     { key: 'kda', label: 'KDA', color: '#C89B3C' },
     { key: 'csPerMin', label: 'CS/min', color: '#00D4FF' },
-    { key: 'winrate', label: 'Winrate %', color: '#8B5CF6' },
+    { key: 'winrate', label: 'Winrate %', color: '#A259FF' },
   ],
   valorant: [
     { key: 'kda', label: 'KDA', color: '#FF4655' },
     { key: 'headshotPct', label: 'HS %', color: '#00D4FF' },
-    { key: 'winrate', label: 'Winrate %', color: '#8B5CF6' },
+    { key: 'winrate', label: 'Winrate %', color: '#A259FF' },
   ],
   fc26: [
     { key: 'goalsPerMatch', label: 'Buts/match', color: '#00A859' },
     { key: 'assistsPerMatch', label: 'Passes D./match', color: '#00D4FF' },
-    { key: 'winrate', label: 'Winrate %', color: '#8B5CF6' },
+    { key: 'winrate', label: 'Winrate %', color: '#A259FF' },
   ],
   rocket_league: [
     { key: 'goalsPerMatch', label: 'Buts/match', color: '#0078F2' },
     { key: 'savesPerMatch', label: 'Saves/match', color: '#00D4FF' },
-    { key: 'winrate', label: 'Winrate %', color: '#8B5CF6' },
+    { key: 'winrate', label: 'Winrate %', color: '#A259FF' },
   ],
   mario_kart: [
     { key: 'avgPosition', label: 'Position moy.', color: '#E60012' },
     { key: 'firstPlaces', label: '1ères places', color: '#FFD700' },
-    { key: 'winrate', label: 'Winrate %', color: '#8B5CF6' },
+    { key: 'winrate', label: 'Winrate %', color: '#A259FF' },
   ],
   smash: [
     { key: 'avgKOs', label: 'KOs moyens', color: '#FF0000' },
-    { key: 'winrate', label: 'Winrate %', color: '#8B5CF6' },
+    { key: 'winrate', label: 'Winrate %', color: '#A259FF' },
   ],
 }
 
@@ -106,14 +106,15 @@ export function MonProfilClient({ player, allTrophies }: Props) {
     reader.readAsDataURL(file)
   }
 
-  const inputClass = 'bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm text-white focus:border-neon-purple focus:outline-none w-full'
+  const inputClass = 'bg-dark-900 border border-dark-600 rounded-lg px-3 py-2 text-sm text-lavender focus:border-neon-purple focus:outline-none w-full'
 
   return (
     <PageTransition>
       <div className="pt-24 pb-16">
         {/* Banner */}
         <div className="relative h-40 md:h-56 bg-gradient-to-r from-dark-800 via-dark-700 to-dark-800 overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(139,92,246,0.1)_0%,transparent_70%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(123,63,228,0.16)_0%,transparent_70%)]" />
+          <div className="absolute bottom-0 right-0 w-64 h-64 pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(224,64,251,0.1) 0%, transparent 65%)' }} />
         </div>
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-14 relative z-10">
@@ -128,27 +129,27 @@ export function MonProfilClient({ player, allTrophies }: Props) {
                 <img src={photo || `https://api.dicebear.com/9.x/thumbs/svg?seed=${player.pseudo}`} alt="" className="w-full h-full object-cover" />
               </div>
               <label className="absolute inset-0 rounded-full bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
-                <span className="text-white text-xs">Changer</span>
+                <span className="text-lavender text-xs">Changer</span>
                 <input type="file" accept="image/*" onChange={handlePhotoUpload} className="hidden" />
               </label>
             </div>
             <div className="text-center sm:text-left">
-              <h1 className="font-gaming text-2xl font-black text-white">{player.pseudo}</h1>
-              <p className="text-gray-400 text-sm">{player.className}</p>
+              <h1 className="font-gaming text-2xl font-black text-lavender">{player.pseudo}</h1>
+              <p className="text-lavender/50 text-sm">{player.className}</p>
             </div>
           </motion.div>
 
           {/* Ranks */}
           <ScrollReveal>
             <section className="mb-10">
-              <h2 className="font-gaming text-lg font-bold text-white mb-4">Mes <span className="text-gradient">Rangs</span></h2>
+              <h2 className="font-gaming text-lg font-bold text-lavender mb-4">Mes <span className="text-gradient">Rangs</span></h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {ALL_GAMES.map((game) => {
                   const rank = player.ranks.find((r: any) => r.game === game)
                   return (
                     <div key={game} className="card-gaming p-4 flex items-center justify-between">
-                      <span className="text-xs text-gray-400">{GAME_NAMES[game]}</span>
-                      {rank ? <RankBadge game={game} rank={rank.rank} showGame={false} size="sm" /> : <span className="text-xs text-gray-600 italic">Non classé</span>}
+                      <span className="text-xs text-lavender/50">{GAME_NAMES[game]}</span>
+                      {rank ? <RankBadge game={game} rank={rank.rank} showGame={false} size="sm" /> : <span className="text-xs text-lavender/30 italic">Non classé</span>}
                     </div>
                   )
                 })}
@@ -159,7 +160,7 @@ export function MonProfilClient({ player, allTrophies }: Props) {
           {/* Trophies */}
           <ScrollReveal>
             <section className="mb-10">
-              <h2 className="font-gaming text-lg font-bold text-white mb-4">Mes <span className="text-gradient">Trophées</span></h2>
+              <h2 className="font-gaming text-lg font-bold text-lavender mb-4">Mes <span className="text-gradient">Trophées</span></h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
                 {allTrophies.map((trophy: any) => {
                   const awarded = player.trophies.find((t: any) => t.trophy.id === trophy.id)
@@ -174,10 +175,10 @@ export function MonProfilClient({ player, allTrophies }: Props) {
           {/* Stats Charts */}
           <ScrollReveal>
             <section className="mb-10">
-              <h2 className="font-gaming text-lg font-bold text-white mb-4">Mes <span className="text-gradient">Statistiques</span></h2>
+              <h2 className="font-gaming text-lg font-bold text-lavender mb-4">Mes <span className="text-gradient">Statistiques</span></h2>
 
               {Object.keys(statsByGame).length === 0 ? (
-                <p className="text-gray-500 text-sm">Aucune statistique enregistrée. Utilise le formulaire ci-dessous pour ajouter tes stats.</p>
+                <p className="text-lavender/40 text-sm">Aucune statistique enregistrée. Utilise le formulaire ci-dessous pour ajouter tes stats.</p>
               ) : (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                   {Object.entries(statsByGame).map(([game, data]) => (
@@ -185,7 +186,7 @@ export function MonProfilClient({ player, allTrophies }: Props) {
                       key={game}
                       title={GAME_NAMES[game] || game}
                       data={data}
-                      dataKeys={STAT_KEYS[game] || [{ key: 'winrate', label: 'Winrate', color: '#8B5CF6' }]}
+                      dataKeys={STAT_KEYS[game] || [{ key: 'winrate', label: 'Winrate', color: '#A259FF' }]}
                     />
                   ))}
                 </div>
@@ -196,7 +197,7 @@ export function MonProfilClient({ player, allTrophies }: Props) {
           {/* Add Stats Form */}
           <ScrollReveal>
             <section>
-              <h2 className="font-gaming text-lg font-bold text-white mb-4">Ajouter des <span className="text-gradient">Stats</span></h2>
+              <h2 className="font-gaming text-lg font-bold text-lavender mb-4">Ajouter des <span className="text-gradient">Stats</span></h2>
 
               {message && (
                 <div className="mb-4 p-3 rounded-lg bg-neon-blue/10 border border-neon-blue/20 text-neon-blue text-sm">{message}</div>
@@ -209,20 +210,20 @@ export function MonProfilClient({ player, allTrophies }: Props) {
                   </select>
                   <input className={inputClass} type="date" value={statForm.date} onChange={(e) => setStatForm({ ...statForm, date: e.target.value })} />
                   <input className={inputClass} placeholder='Ex: {"kda": 3.5, "winrate": 60}' value={statForm.data} onChange={(e) => setStatForm({ ...statForm, data: e.target.value })} />
-                  <button onClick={addStat} className="px-4 py-2 rounded-lg bg-gradient-to-r from-neon-blue to-neon-purple text-white text-sm font-bold hover:opacity-90 transition-all">
+                  <button onClick={addStat} className="px-4 py-2 rounded-lg bg-gradient-to-r from-neon-blue to-neon-purple text-lavender text-sm font-bold hover:opacity-90 transition-all">
                     Ajouter
                   </button>
                 </div>
 
                 {/* Hint about stats format */}
-                <div className="text-[10px] text-gray-600 space-y-1">
+                <div className="text-[10px] text-lavender/30 space-y-1">
                   <p>Format JSON. Clés possibles par jeu :</p>
-                  <p><span className="text-gray-400">LoL:</span> kda, csPerMin, visionScore, winrate</p>
-                  <p><span className="text-gray-400">Valorant:</span> kda, headshotPct, winrate</p>
-                  <p><span className="text-gray-400">FC 26:</span> goalsPerMatch, assistsPerMatch, possession, winrate</p>
-                  <p><span className="text-gray-400">Rocket League:</span> goalsPerMatch, savesPerMatch, assistsPerMatch, winrate</p>
-                  <p><span className="text-gray-400">Mario Kart:</span> avgPosition, firstPlaces, winrate</p>
-                  <p><span className="text-gray-400">Smash:</span> avgKOs, winrate</p>
+                  <p><span className="text-lavender/50">LoL:</span> kda, csPerMin, visionScore, winrate</p>
+                  <p><span className="text-lavender/50">Valorant:</span> kda, headshotPct, winrate</p>
+                  <p><span className="text-lavender/50">FC 26:</span> goalsPerMatch, assistsPerMatch, possession, winrate</p>
+                  <p><span className="text-lavender/50">Rocket League:</span> goalsPerMatch, savesPerMatch, assistsPerMatch, winrate</p>
+                  <p><span className="text-lavender/50">Mario Kart:</span> avgPosition, firstPlaces, winrate</p>
+                  <p><span className="text-lavender/50">Smash:</span> avgKOs, winrate</p>
                 </div>
               </div>
             </section>

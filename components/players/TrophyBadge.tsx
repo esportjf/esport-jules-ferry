@@ -22,7 +22,7 @@ export function TrophyBadge({ name, description, icon, rarity, unlocked, awarded
           : 'bg-dark-900 opacity-40 grayscale'
       }`}
       style={{
-        borderColor: unlocked ? `${color}40` : '#242438',
+        borderColor: unlocked ? `${color}40` : '#2D1B69',
         boxShadow: unlocked ? `0 0 20px ${color}15` : 'none',
       }}
     >
@@ -30,7 +30,7 @@ export function TrophyBadge({ name, description, icon, rarity, unlocked, awarded
       <h4 className="font-gaming text-xs font-bold mb-1" style={{ color: unlocked ? color : '#6B7280' }}>
         {name}
       </h4>
-      <p className="text-gray-500 text-xs leading-relaxed">{description}</p>
+      <p className="text-lavender/40 text-xs leading-relaxed">{description}</p>
       <div className="mt-2 flex items-center justify-between">
         <span
           className="text-[10px] font-bold uppercase tracking-wider"
@@ -39,7 +39,7 @@ export function TrophyBadge({ name, description, icon, rarity, unlocked, awarded
           {rarity}
         </span>
         {unlocked && awardedAt && (
-          <span className="text-gray-600 text-[10px]">
+          <span className="font-mono text-lavender/30 text-[10px]">
             {new Date(awardedAt).toLocaleDateString('fr-FR')}
           </span>
         )}

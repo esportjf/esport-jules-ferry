@@ -20,7 +20,13 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-dark-900/80 backdrop-blur-xl border-b border-dark-600/50">
+    <nav
+      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl"
+      style={{
+        background: 'rgba(6,4,15,0.85)',
+        borderBottom: '1px solid rgba(45,27,105,0.5)',
+      }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -36,10 +42,10 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                  className={`px-3 py-2 rounded-lg text-sm font-body font-medium tracking-wide transition-all duration-200 ${
                     isActive
-                      ? 'text-neon-purple bg-neon-purple/10'
-                      : 'text-gray-400 hover:text-white hover:bg-dark-700'
+                      ? 'text-neon-blue bg-neon-purple/12'
+                      : 'text-lavender/50 hover:text-lavender hover:bg-dark-700/60'
                   }`}
                 >
                   {link.label}
@@ -55,7 +61,8 @@ export function Navbar() {
                 {session.user.role === 'admin' && (
                   <Link
                     href="/admin"
-                    className="text-xs px-3 py-1.5 rounded-lg bg-neon-purple/20 text-neon-purple border border-neon-purple/30 hover:bg-neon-purple/30 transition-all"
+                    className="text-xs px-3 py-1.5 rounded-lg text-neon-purple border border-neon-purple/30 hover:bg-neon-purple/15 transition-all"
+                    style={{ background: 'rgba(123,63,228,0.08)' }}
                   >
                     Admin
                   </Link>
@@ -63,14 +70,15 @@ export function Navbar() {
                 {session.user.role === 'player' && (
                   <Link
                     href="/mon-profil"
-                    className="text-xs px-3 py-1.5 rounded-lg bg-neon-blue/20 text-neon-blue border border-neon-blue/30 hover:bg-neon-blue/30 transition-all"
+                    className="text-xs px-3 py-1.5 rounded-lg text-neon-blue border border-neon-blue/30 hover:bg-neon-blue/15 transition-all"
+                    style={{ background: 'rgba(162,89,255,0.08)' }}
                   >
                     Mon Profil
                   </Link>
                 )}
                 <button
                   onClick={() => signOut()}
-                  className="text-xs px-3 py-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-dark-700 transition-all"
+                  className="text-xs px-3 py-1.5 rounded-lg text-lavender/40 hover:text-lavender hover:bg-dark-700/60 transition-all"
                 >
                   Déconnexion
                 </button>
@@ -78,7 +86,11 @@ export function Navbar() {
             ) : (
               <Link
                 href="/login"
-                className="text-sm px-4 py-2 rounded-lg bg-gradient-to-r from-neon-blue to-neon-purple text-white font-medium hover:shadow-lg hover:shadow-neon-purple/25 transition-all duration-300"
+                className="text-sm px-4 py-2 rounded-lg text-white font-body font-semibold tracking-wide transition-all duration-300 hover:scale-105"
+                style={{
+                  background: 'linear-gradient(135deg, #7B3FE4 0%, #A259FF 100%)',
+                  boxShadow: '0 0 16px rgba(123,63,228,0.35)',
+                }}
               >
                 Connexion
               </Link>
@@ -87,7 +99,8 @@ export function Navbar() {
             {/* Mobile toggle */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2 rounded-lg hover:bg-dark-700"
+              className="md:hidden p-2 rounded-lg hover:bg-dark-700/60 text-lavender/60 hover:text-lavender transition-colors"
+              aria-label="Menu"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {mobileOpen ? (
@@ -108,7 +121,12 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-dark-600/50 bg-dark-900/95 backdrop-blur-xl"
+            style={{
+              borderTop: '1px solid rgba(45,27,105,0.4)',
+              background: 'rgba(6,4,15,0.97)',
+              backdropFilter: 'blur(20px)',
+            }}
+            className="md:hidden"
           >
             <div className="px-4 py-3 space-y-1">
               {navLinks.map((link) => (
@@ -116,10 +134,10 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className={`block px-3 py-2 rounded-lg text-sm ${
+                  className={`block px-3 py-2.5 rounded-lg text-sm font-body font-medium tracking-wide ${
                     pathname === link.href
-                      ? 'text-neon-purple bg-neon-purple/10'
-                      : 'text-gray-400 hover:text-white'
+                      ? 'text-neon-blue bg-neon-purple/10'
+                      : 'text-lavender/50 hover:text-lavender'
                   }`}
                 >
                   {link.label}

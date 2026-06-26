@@ -40,11 +40,13 @@ export function PlayerProfileClient({ player, allTrophies }: { player: PlayerPro
       <div className="pt-24 pb-16">
         {/* Banner */}
         <div className="relative h-48 md:h-64 bg-gradient-to-r from-dark-800 via-dark-700 to-dark-800 overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(139,92,246,0.1)_0%,transparent_70%)]" />
-          <div className="absolute inset-0 opacity-20" style={{
-            backgroundImage: 'linear-gradient(rgba(139,92,246,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(139,92,246,0.05) 1px, transparent 1px)',
-            backgroundSize: '30px 30px',
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(123,63,228,0.16)_0%,transparent_70%)]" />
+          <div className="absolute inset-0 opacity-25" style={{
+            backgroundImage: 'linear-gradient(rgba(123,63,228,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(123,63,228,0.08) 1px, transparent 1px)',
+            backgroundSize: '32px 32px',
           }} />
+          {/* Accent magenta bas-droite */}
+          <div className="absolute bottom-0 right-0 w-64 h-64 pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(224,64,251,0.12) 0%, transparent 65%)' }} />
         </div>
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-10">
@@ -62,9 +64,9 @@ export function PlayerProfileClient({ player, allTrophies }: { player: PlayerPro
               />
             </div>
             <div className="text-center sm:text-left">
-              <h1 className="font-gaming text-2xl sm:text-3xl font-black text-white">{player.pseudo}</h1>
+              <h1 className="font-gaming text-2xl sm:text-3xl font-black text-lavender">{player.pseudo}</h1>
               <div className="flex items-center gap-2 mt-1">
-                <span className="text-xs px-2 py-0.5 rounded-full bg-dark-700 text-gray-400">{player.className}</span>
+                <span className="font-mono text-xs px-2 py-0.5 rounded-full bg-dark-700 text-lavender/50">{player.className}</span>
                 {player.mainGame && (
                   <span className="text-xs px-2 py-0.5 rounded-full bg-neon-purple/10 text-neon-purple border border-neon-purple/20">
                     {GAME_NAMES[player.mainGame]}
@@ -77,7 +79,7 @@ export function PlayerProfileClient({ player, allTrophies }: { player: PlayerPro
           {/* Ranks */}
           <ScrollReveal>
             <section className="mb-10">
-              <h2 className="font-gaming text-lg font-bold text-white mb-4">
+              <h2 className="font-gaming text-lg font-bold text-lavender mb-4">
                 Rangs <span className="text-gradient">par Jeu</span>
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -86,11 +88,11 @@ export function PlayerProfileClient({ player, allTrophies }: { player: PlayerPro
                   return (
                     <div key={game} className="card-gaming p-4">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs text-gray-400">{GAME_NAMES[game]}</span>
+                        <span className="text-xs text-lavender/50">{GAME_NAMES[game]}</span>
                         {rank ? (
                           <RankBadge game={game} rank={rank.rank} showGame={false} size="sm" />
                         ) : (
-                          <span className="text-xs text-gray-600 italic">Non classé</span>
+                          <span className="text-xs text-lavender/30 italic">Non classé</span>
                         )}
                       </div>
                     </div>
@@ -103,7 +105,7 @@ export function PlayerProfileClient({ player, allTrophies }: { player: PlayerPro
           {/* Trophies */}
           <ScrollReveal>
             <section>
-              <h2 className="font-gaming text-lg font-bold text-white mb-4">
+              <h2 className="font-gaming text-lg font-bold text-lavender mb-4">
                 Trophées <span className="text-gradient">& Succès</span>
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">

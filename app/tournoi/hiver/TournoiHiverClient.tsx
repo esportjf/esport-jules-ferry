@@ -28,15 +28,15 @@ function BinomeCard({ boy, girl, game }: { boy: Slot; girl: Slot; game: string }
       <div className="flex items-center justify-center gap-4">
         {[boy, girl].map((slot) => (
           <div key={slot.id} className="text-center">
-            <div className={`w-16 h-16 rounded-full overflow-hidden mx-auto mb-2 border-2 ${slot.player ? 'border-neon-purple/50' : 'border-dashed border-gray-600'}`}>
+            <div className={`w-16 h-16 rounded-full overflow-hidden mx-auto mb-2 border-2 ${slot.player ? 'border-neon-purple/60' : 'border-dashed border-lavender/20'}`}>
               {slot.player ? (
                 <img src={slot.player.photo || `https://api.dicebear.com/9.x/thumbs/svg?seed=${slot.player.pseudo}`} alt="" className="w-full h-full object-cover" />
               ) : (
-                <div className="w-full h-full flex items-center justify-center bg-dark-900 text-gray-600 text-lg">?</div>
+                <div className="w-full h-full flex items-center justify-center bg-dark-900 text-lavender/30 text-lg">?</div>
               )}
             </div>
-            <p className="font-gaming text-xs font-bold text-white">{slot.player?.pseudo || '—'}</p>
-            <span className="text-[10px] text-gray-500">{slot.slotType === 'binome_boy' ? 'Garçon' : 'Fille'}</span>
+            <p className="font-gaming text-xs font-bold text-lavender">{slot.player?.pseudo || '—'}</p>
+            <span className="font-mono text-[10px] text-lavender/40">{slot.slotType === 'binome_boy' ? 'Garçon' : 'Fille'}</span>
           </div>
         ))}
       </div>
@@ -52,7 +52,7 @@ export function TournoiHiverClient({ tournament }: { tournament: TournamentData 
     return (
       <PageTransition>
         <div className="pt-24 pb-16 text-center">
-          <p className="text-gray-500">Aucun tournoi d&apos;hiver n&apos;a encore été créé.</p>
+          <p className="text-lavender/40">Aucun tournoi d&apos;hiver n&apos;a encore été créé.</p>
         </div>
       </PageTransition>
     )
@@ -69,15 +69,15 @@ export function TournoiHiverClient({ tournament }: { tournament: TournamentData 
       <div className="pt-24 pb-16">
         {/* Header */}
         <div className="relative py-16 mb-10 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-900/20 via-dark-800 to-purple-900/20" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(139,92,246,0.1)_0%,transparent_60%)]" />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, rgba(123,63,228,0.18) 0%, rgba(13,11,31,1) 50%, rgba(0,212,255,0.12) 100%)' }} />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(0,212,255,0.12)_0%,transparent_60%)]" />
           <div className="relative max-w-4xl mx-auto px-4 text-center">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
               <span className="text-5xl mb-4 block">❄️</span>
-              <h1 className="font-gaming text-3xl sm:text-4xl font-black text-white mb-2">{tournament.name}</h1>
-              <p className="text-gray-400 mb-4">Campus Cyber — Puteaux</p>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-purple/10 border border-neon-purple/20">
-                <span className="text-neon-purple text-sm font-medium">4 joueurs + 4 supporters</span>
+              <h1 className="font-gaming text-3xl sm:text-4xl font-black text-lavender mb-2">{tournament.name}</h1>
+              <p className="text-lavender/50 mb-4">Campus Cyber — Puteaux</p>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-purple/10 border border-neon-purple/25">
+                <span className="font-mono text-neon-blue text-sm tracking-wide">4 joueurs + 4 supporters</span>
               </div>
             </motion.div>
           </div>

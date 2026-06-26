@@ -11,21 +11,21 @@ interface StatChartProps {
 export function StatChart({ data, dataKeys, title }: StatChartProps) {
   return (
     <div className="card-gaming p-4">
-      <h4 className="font-gaming text-xs font-bold text-gray-300 mb-4">{title}</h4>
+      <h4 className="font-gaming text-xs font-bold text-lavender/70 mb-4">{title}</h4>
       <div className="h-48">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={data}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#242438" />
+            <CartesianGrid strokeDasharray="3 3" stroke="#2D1B69" />
             <XAxis
               dataKey="date"
-              stroke="#4B5563"
-              tick={{ fontSize: 10 }}
+              stroke="#6F5C9E"
+              tick={{ fontSize: 10, fontFamily: 'DM Mono, monospace' }}
             />
-            <YAxis stroke="#4B5563" tick={{ fontSize: 10 }} />
+            <YAxis stroke="#6F5C9E" tick={{ fontSize: 10, fontFamily: 'DM Mono, monospace' }} />
             <Tooltip
               contentStyle={{
-                backgroundColor: '#1a1a2e',
-                border: '1px solid #242438',
+                backgroundColor: '#0D0B1F',
+                border: '1px solid #2D1B69',
                 borderRadius: '8px',
                 fontSize: '12px',
               }}

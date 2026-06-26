@@ -42,10 +42,13 @@ export function JoueursClient({ players }: { players: Player[] }) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <h1 className="font-gaming text-3xl sm:text-4xl font-black text-white mb-2">
+            <p className="font-mono text-xs tracking-[0.3em] uppercase mb-3" style={{ color: 'rgba(162,89,255,0.6)' }}>
+              Roster
+            </p>
+            <h1 className="font-gaming text-3xl sm:text-4xl font-black text-lavender mb-2">
               Nos <span className="text-gradient">Joueurs</span>
             </h1>
-            <p className="text-gray-500">Les 20 talents de la section e-sport</p>
+            <p className="text-lavender/40">Les 20 talents de la section e-sport</p>
           </motion.div>
 
           {/* Filters */}
@@ -58,7 +61,7 @@ export function JoueursClient({ players }: { players: Player[] }) {
             <select
               value={gameFilter}
               onChange={(e) => setGameFilter(e.target.value)}
-              className="bg-dark-800 border border-dark-600 rounded-lg px-4 py-2 text-sm text-gray-300 focus:border-neon-blue focus:outline-none"
+              className="bg-dark-800 border border-dark-600 rounded-lg px-4 py-2 text-sm text-lavender/70 focus:border-neon-blue focus:outline-none"
             >
               <option value="all">Tous les jeux</option>
               {ALL_GAMES.map((g) => (
@@ -69,7 +72,7 @@ export function JoueursClient({ players }: { players: Player[] }) {
             <select
               value={rankFilter}
               onChange={(e) => setRankFilter(e.target.value)}
-              className="bg-dark-800 border border-dark-600 rounded-lg px-4 py-2 text-sm text-gray-300 focus:border-neon-blue focus:outline-none"
+              className="bg-dark-800 border border-dark-600 rounded-lg px-4 py-2 text-sm text-lavender/70 focus:border-neon-blue focus:outline-none"
             >
               <option value="all">Tous les rangs</option>
               {RANK_ORDER.map((r) => (
@@ -77,7 +80,7 @@ export function JoueursClient({ players }: { players: Player[] }) {
               ))}
             </select>
 
-            <span className="text-gray-600 text-sm">{filtered.length} joueur{filtered.length > 1 ? 's' : ''}</span>
+            <span className="font-mono text-lavender/40 text-sm">{filtered.length} joueur{filtered.length > 1 ? 's' : ''}</span>
           </motion.div>
 
           {/* Grid */}
@@ -89,7 +92,7 @@ export function JoueursClient({ players }: { players: Player[] }) {
 
           {filtered.length === 0 && (
             <div className="text-center py-20">
-              <p className="text-gray-600 text-lg">Aucun joueur ne correspond aux filtres sélectionnés.</p>
+              <p className="text-lavender/30 text-lg">Aucun joueur ne correspond aux filtres sélectionnés.</p>
             </div>
           )}
         </div>

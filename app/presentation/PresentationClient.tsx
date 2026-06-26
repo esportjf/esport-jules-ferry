@@ -48,14 +48,14 @@ export function PresentationClient() {
         {/* Header */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-20">
           <motion.h1
-            className="font-gaming text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4"
+            className="font-gaming text-3xl sm:text-4xl md:text-5xl font-black text-lavender mb-4"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
           >
             Notre <span className="text-gradient">Section</span>
           </motion.h1>
           <motion.p
-            className="text-gray-500 max-w-2xl mx-auto text-lg"
+            className="text-lavender/40 max-w-2xl mx-auto text-lg"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -67,7 +67,7 @@ export function PresentationClient() {
         {/* Timeline */}
         <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
           <ScrollReveal>
-            <h2 className="font-gaming text-2xl font-black text-white mb-10 text-center">
+            <h2 className="font-gaming text-2xl font-black text-lavender mb-10 text-center">
               Notre <span className="text-gradient">Histoire</span>
             </h2>
           </ScrollReveal>
@@ -80,9 +80,9 @@ export function PresentationClient() {
                 <div className={`relative mb-8 md:flex ${i % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
                   <div className="absolute left-4 md:left-1/2 md:-translate-x-1/2 top-2 w-5 h-5 rounded-full bg-dark-900 border-2 border-neon-blue z-10" />
                   <div className={`ml-14 md:ml-0 md:w-1/2 ${i % 2 === 0 ? 'md:pl-10' : 'md:pr-10 md:text-right'}`}>
-                    <span className="text-neon-blue text-xs font-bold">{item.date}</span>
-                    <h3 className="font-gaming text-sm font-bold text-white mt-1">{item.title}</h3>
-                    <p className="text-gray-500 text-sm mt-1">{item.description}</p>
+                    <span className="font-mono text-neon-blue text-xs tracking-wide">{item.date}</span>
+                    <h3 className="font-gaming text-sm font-bold text-lavender mt-1">{item.title}</h3>
+                    <p className="text-lavender/40 text-sm mt-1">{item.description}</p>
                   </div>
                 </div>
               </ScrollReveal>
@@ -94,7 +94,7 @@ export function PresentationClient() {
         <section className="bg-dark-800/30 py-20 mb-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <ScrollReveal>
-              <h2 className="font-gaming text-2xl font-black text-white mb-10 text-center">
+              <h2 className="font-gaming text-2xl font-black text-lavender mb-10 text-center">
                 Nos <span className="text-gradient">Objectifs</span>
               </h2>
             </ScrollReveal>
@@ -104,8 +104,8 @@ export function PresentationClient() {
                 <ScrollReveal key={obj.title} delay={i * 0.05}>
                   <div className="card-gaming p-5 h-full text-center">
                     <div className="text-3xl mb-3">{obj.icon}</div>
-                    <h3 className="font-gaming text-xs font-bold text-white mb-2">{obj.title}</h3>
-                    <p className="text-gray-500 text-xs leading-relaxed">{obj.description}</p>
+                    <h3 className="font-gaming text-xs font-bold text-lavender mb-2">{obj.title}</h3>
+                    <p className="text-lavender/40 text-xs leading-relaxed">{obj.description}</p>
                   </div>
                 </ScrollReveal>
               ))}
@@ -116,7 +116,7 @@ export function PresentationClient() {
         {/* Method */}
         <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
           <ScrollReveal>
-            <h2 className="font-gaming text-2xl font-black text-white mb-10 text-center">
+            <h2 className="font-gaming text-2xl font-black text-lavender mb-10 text-center">
               Notre <span className="text-gradient">Méthode</span>
             </h2>
           </ScrollReveal>
@@ -124,15 +124,15 @@ export function PresentationClient() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               { step: '01', title: 'Théorie', desc: '30 minutes de cours sur la stratégie, l\'analyse de jeu et les compétences psychosociales.', color: '#00D4FF' },
-              { step: '02', title: 'Échauffement', desc: 'Exercices de warm-up physiques et cognitifs pour préparer la session.', color: '#8B5CF6' },
-              { step: '03', title: 'Pratique', desc: 'Entraînement encadré sur les jeux, avec objectifs spécifiques et feedback en temps réel.', color: '#EC4899' },
+              { step: '02', title: 'Échauffement', desc: 'Exercices de warm-up physiques et cognitifs pour préparer la session.', color: '#A259FF' },
+              { step: '03', title: 'Pratique', desc: 'Entraînement encadré sur les jeux, avec objectifs spécifiques et feedback en temps réel.', color: '#E040FB' },
               { step: '04', title: 'Débriefing', desc: 'Retour collectif sur la session : analyse des performances et axes d\'amélioration.', color: '#FFD700' },
             ].map((item, i) => (
               <ScrollReveal key={item.step} delay={i * 0.1}>
                 <div className="card-gaming p-5 h-full">
                   <span className="font-gaming text-2xl font-black" style={{ color: item.color }}>{item.step}</span>
-                  <h3 className="font-gaming text-sm font-bold text-white mt-2 mb-2">{item.title}</h3>
-                  <p className="text-gray-500 text-xs leading-relaxed">{item.desc}</p>
+                  <h3 className="font-gaming text-sm font-bold text-lavender mt-2 mb-2">{item.title}</h3>
+                  <p className="text-lavender/40 text-xs leading-relaxed">{item.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -142,7 +142,7 @@ export function PresentationClient() {
         {/* Games */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
           <ScrollReveal>
-            <h2 className="font-gaming text-2xl font-black text-white mb-10 text-center">
+            <h2 className="font-gaming text-2xl font-black text-lavender mb-10 text-center">
               Nos <span className="text-gradient">Jeux</span>
             </h2>
           </ScrollReveal>
@@ -158,11 +158,11 @@ export function PresentationClient() {
                     <h3 className="font-gaming text-sm font-bold" style={{ color: GAME_COLORS[game.key] }}>
                       {GAME_NAMES[game.key]}
                     </h3>
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-dark-700 text-gray-400">
+                    <span className="font-mono text-[10px] px-2 py-0.5 rounded-full bg-dark-700 text-lavender/50">
                       {GAME_PLATFORMS[game.key]}
                     </span>
                   </div>
-                  <p className="text-gray-500 text-sm leading-relaxed">{game.description}</p>
+                  <p className="text-lavender/40 text-sm leading-relaxed">{game.description}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -173,7 +173,7 @@ export function PresentationClient() {
         <section className="bg-dark-800/30 py-20 mb-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <ScrollReveal>
-              <h2 className="font-gaming text-2xl font-black text-white mb-10 text-center">
+              <h2 className="font-gaming text-2xl font-black text-lavender mb-10 text-center">
                 Vision à <span className="text-gradient">3 ans</span>
               </h2>
             </ScrollReveal>
@@ -183,8 +183,8 @@ export function PresentationClient() {
                 <ScrollReveal key={pillar.title} delay={i * 0.15}>
                   <div className="text-center p-8 rounded-2xl bg-dark-800 border border-dark-600 hover:border-neon-blue/30 transition-all duration-300">
                     <div className="text-4xl mb-4">{pillar.icon}</div>
-                    <h3 className="font-gaming text-base font-bold text-white mb-3">{pillar.title}</h3>
-                    <p className="text-gray-500 text-sm leading-relaxed">{pillar.description}</p>
+                    <h3 className="font-gaming text-base font-bold text-lavender mb-3">{pillar.title}</h3>
+                    <p className="text-lavender/40 text-sm leading-relaxed">{pillar.description}</p>
                   </div>
                 </ScrollReveal>
               ))}
@@ -195,7 +195,7 @@ export function PresentationClient() {
         {/* Partners */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <h2 className="font-gaming text-2xl font-black text-white mb-10 text-center">
+            <h2 className="font-gaming text-2xl font-black text-lavender mb-10 text-center">
               Nos <span className="text-gradient">Partenaires</span>
             </h2>
           </ScrollReveal>
@@ -204,7 +204,7 @@ export function PresentationClient() {
             {['Educ Esport', 'ArmaTeam', 'I3SP', 'France 2030'].map((partner, i) => (
               <ScrollReveal key={partner} delay={i * 0.1}>
                 <div className="px-8 py-4 rounded-xl bg-dark-800 border border-dark-600 hover:border-neon-blue/30 transition-all">
-                  <span className="font-gaming text-sm text-gray-400">{partner}</span>
+                  <span className="font-gaming text-sm text-lavender/50">{partner}</span>
                 </div>
               </ScrollReveal>
             ))}
