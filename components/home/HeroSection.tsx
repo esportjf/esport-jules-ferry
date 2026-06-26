@@ -2,14 +2,63 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { useEffect, useRef } from 'react'
 
 export function HeroSection() {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  // Respecte "réduire les animations" : on fige la vidéo sur sa première image.
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const apply = () => {
+      if (reduce.matches) video.pause()
+      else video.play().catch(() => {})
+    }
+    apply()
+    reduce.addEventListener('change', apply)
+    return () => reduce.removeEventListener('change', apply)
+  }, [])
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-dark-900">
 
-      {/* Perspective grid — arena floor receding to horizon */}
+      {/* Vidéo de fond — muette, en boucle, sans contrôle */}
+      <video
+        ref={videoRef}
+        className="absolute inset-0 w-full h-full object-cover"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-hidden="true"
+      >
+        <source src="/hero-bg.mp4" type="video/mp4" />
+      </video>
+
+      {/* Overlay lisibilité + teinte de marque (garde le texte lisible sur n'importe quelle image) */}
       <div
-        className="absolute inset-0 overflow-hidden"
+        className="absolute inset-0"
+        aria-hidden="true"
+        style={{
+          background:
+            'linear-gradient(180deg, rgba(6,4,15,0.74) 0%, rgba(13,11,31,0.55) 45%, rgba(6,4,15,0.94) 100%)',
+        }}
+      />
+      <div
+        className="absolute inset-0"
+        aria-hidden="true"
+        style={{
+          background:
+            'radial-gradient(ellipse 70% 50% at 50% 42%, rgba(123,63,228,0.14) 0%, transparent 70%)',
+        }}
+      />
+
+      {/* Perspective grid — arena floor receding to horizon (subtile, par-dessus la vidéo) */}
+      <div
+        className="absolute inset-0 overflow-hidden pointer-events-none"
         aria-hidden="true"
         style={{ perspective: '700px' }}
       >
@@ -23,32 +72,15 @@ export function HeroSection() {
             transformOrigin: '50% 100%',
             transform: 'rotateX(62deg)',
             backgroundImage: `
-              linear-gradient(rgba(123,63,228,0.22) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(123,63,228,0.22) 1px, transparent 1px)
+              linear-gradient(rgba(123,63,228,0.16) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(123,63,228,0.16) 1px, transparent 1px)
             `,
             backgroundSize: '90px 90px',
-          }}
-        />
-        {/* Fade grid toward horizon and edges */}
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            background: 'radial-gradient(ellipse 80% 60% at 50% 65%, transparent 25%, #06040F 72%)',
+            WebkitMaskImage: 'radial-gradient(ellipse 80% 60% at 50% 100%, black 20%, transparent 72%)',
+            maskImage: 'radial-gradient(ellipse 80% 60% at 50% 100%, black 20%, transparent 72%)',
           }}
         />
       </div>
-
-      {/* Ligne horizon lumineuse */}
-      <div
-        className="absolute left-0 right-0"
-        aria-hidden="true"
-        style={{
-          top: '58%',
-          height: '1px',
-          background: 'linear-gradient(90deg, transparent 0%, rgba(123,63,228,0.5) 30%, rgba(224,64,251,0.35) 70%, transparent 100%)',
-        }}
-      />
 
       {/* Halo asymétrique — grand violet haut-gauche */}
       <div

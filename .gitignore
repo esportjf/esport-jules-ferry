@@ -18,6 +18,11 @@
 .DS_Store
 *.pem
 
+# media sources (vidéos brutes non compressées — jamais dans git)
+/_media-src/
+/public/*.source.mp4
+*.raw.mp4
+
 # debug
 npm-debug.log*
 yarn-debug.log*
